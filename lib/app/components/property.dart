@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core_template/app/resources/icons.dart';
+import 'package:core_template/app/views/property/page.dart';
 import 'package:core_template/core/models/property/property.dart';
 import 'package:core_template/core/utils/extensions/extensions.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -99,7 +100,7 @@ class PropertyItem extends StatelessWidget {
               ).paddingOnly(bottom: 5, top: 5),
               Spacer(),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Row(
                     children: [
@@ -170,6 +171,8 @@ class PropertyItem extends StatelessWidget {
           )
         ],
       ),
-    );
+    ).click(onTap: () {
+      Navigator.pushNamed(context, PropertyPage.name, arguments: property.slug);
+    });
   }
 }

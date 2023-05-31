@@ -1,4 +1,4 @@
-# core_template
+# Aqqarati app
 
 A new Flutter project.
 

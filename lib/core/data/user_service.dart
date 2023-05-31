@@ -1,6 +1,6 @@
 import 'package:core_template/core/data/base_service.dart';
 
-class UserService with BaseService {
+class UserService extends BaseService {
   UserService._();
   static UserService instance = UserService._();
 

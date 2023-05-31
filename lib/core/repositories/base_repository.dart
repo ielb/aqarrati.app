@@ -1,6 +1,8 @@
+import 'package:contextual_logging/src/contextual_logger.dart';
 import 'package:flutter/foundation.dart';
 
-class BaseRepository with ChangeNotifier, DiagnosticableTreeMixin {
+class BaseRepository
+    with ChangeNotifier, DiagnosticableTreeMixin, ContextualLogger {
   bool loading = false;
   bool error = false;
   String errorMessage = '';

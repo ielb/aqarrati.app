@@ -25,6 +25,7 @@ mixin _$City {
   String get name_fr => throw _privateConstructorUsedError;
   String get name_ar => throw _privateConstructorUsedError;
   String? get image => throw _privateConstructorUsedError;
+  int? get propertyCount => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,7 +38,12 @@ abstract class $CityCopyWith<$Res> {
       _$CityCopyWithImpl<$Res, City>;
   @useResult
   $Res call(
-      {int id, String name_en, String name_fr, String name_ar, String? image});
+      {int id,
+      String name_en,
+      String name_fr,
+      String name_ar,
+      String? image,
+      int? propertyCount});
 }
 
 /// @nodoc
@@ -58,6 +64,7 @@ class _$CityCopyWithImpl<$Res, $Val extends City>
     Object? name_fr = null,
     Object? name_ar = null,
     Object? image = freezed,
+    Object? propertyCount = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -80,6 +87,10 @@ class _$CityCopyWithImpl<$Res, $Val extends City>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String?,
+      propertyCount: freezed == propertyCount
+          ? _value.propertyCount
+          : propertyCount // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -91,7 +102,12 @@ abstract class _$$_CityCopyWith<$Res> implements $CityCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int id, String name_en, String name_fr, String name_ar, String? image});
+      {int id,
+      String name_en,
+      String name_fr,
+      String name_ar,
+      String? image,
+      int? propertyCount});
 }
 
 /// @nodoc
@@ -108,6 +124,7 @@ class __$$_CityCopyWithImpl<$Res> extends _$CityCopyWithImpl<$Res, _$_City>
     Object? name_fr = null,
     Object? name_ar = null,
     Object? image = freezed,
+    Object? propertyCount = freezed,
   }) {
     return _then(_$_City(
       id: null == id
@@ -130,6 +147,10 @@ class __$$_CityCopyWithImpl<$Res> extends _$CityCopyWithImpl<$Res, _$_City>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String?,
+      propertyCount: freezed == propertyCount
+          ? _value.propertyCount
+          : propertyCount // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -142,7 +163,8 @@ class _$_City implements _City {
       this.name_en = 'Casablanca',
       this.name_fr = 'Casablanca',
       this.name_ar = 'Casablanca',
-      this.image});
+      this.image,
+      this.propertyCount});
 
   factory _$_City.fromJson(Map<String, dynamic> json) => _$$_CityFromJson(json);
 
@@ -160,10 +182,12 @@ class _$_City implements _City {
   final String name_ar;
   @override
   final String? image;
+  @override
+  final int? propertyCount;
 
   @override
   String toString() {
-    return 'City(id: $id, name_en: $name_en, name_fr: $name_fr, name_ar: $name_ar, image: $image)';
+    return 'City(id: $id, name_en: $name_en, name_fr: $name_fr, name_ar: $name_ar, image: $image, propertyCount: $propertyCount)';
   }
 
   @override
@@ -175,13 +199,15 @@ class _$_City implements _City {
             (identical(other.name_en, name_en) || other.name_en == name_en) &&
             (identical(other.name_fr, name_fr) || other.name_fr == name_fr) &&
             (identical(other.name_ar, name_ar) || other.name_ar == name_ar) &&
-            (identical(other.image, image) || other.image == image));
+            (identical(other.image, image) || other.image == image) &&
+            (identical(other.propertyCount, propertyCount) ||
+                other.propertyCount == propertyCount));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, name_en, name_fr, name_ar, image);
+  int get hashCode => Object.hash(
+      runtimeType, id, name_en, name_fr, name_ar, image, propertyCount);
 
   @JsonKey(ignore: true)
   @override
@@ -203,7 +229,8 @@ abstract class _City implements City {
       final String name_en,
       final String name_fr,
       final String name_ar,
-      final String? image}) = _$_City;
+      final String? image,
+      final int? propertyCount}) = _$_City;
 
   factory _City.fromJson(Map<String, dynamic> json) = _$_City.fromJson;
 
@@ -217,6 +244,8 @@ abstract class _City implements City {
   String get name_ar;
   @override
   String? get image;
+  @override
+  int? get propertyCount;
   @override
   @JsonKey(ignore: true)
   _$$_CityCopyWith<_$_City> get copyWith => throw _privateConstructorUsedError;

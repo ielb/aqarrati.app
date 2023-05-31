@@ -11,6 +11,7 @@ class City with _$City {
     @Default('Casablanca') String name_fr,
     @Default('Casablanca') String name_ar,
     String? image,
+    int? propertyCount,
   }) = _City;
 
   factory City.fromJson(Map<String, dynamic> json) => _$CityFromJson(json);

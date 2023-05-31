@@ -1,11 +1,10 @@
-import 'package:contextual_logging/src/contextual_logger.dart';
 import 'package:core_template/core/data/property_service.dart';
 import 'package:core_template/core/models/property/paginated_property.dart';
 import 'package:core_template/core/models/property/property.dart';
 import 'package:core_template/core/repositories/base_repository.dart';
 import 'package:dio/dio.dart';
 
-class PropertyRepository extends BaseRepository with ContextualLogger {
+class PropertyRepository extends BaseRepository {
   PropertyRepository() {
     this.init();
   }
@@ -36,6 +35,21 @@ class PropertyRepository extends BaseRepository with ContextualLogger {
       }
     } catch (e) {
       log.e(e.toString());
+    }
+  }
+
+  Future<Property?> fetchProperty(String slug) async {
+    try {
+      Response<Map<String, dynamic>> res =
+          await PropertyService.instance.fetchProperty(slug);
+      log.i(res.data?['user']);
+      if (res.statusCode == 200 && res.data != null) {
+        return Property.fromJson(res.data!);
+      }
+      return null;
+    } catch (e) {
+      log.e(e.toString());
+      return null;
     }
   }
 }

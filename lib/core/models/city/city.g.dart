@@ -12,6 +12,7 @@ _$_City _$$_CityFromJson(Map<String, dynamic> json) => _$_City(
       name_fr: json['name_fr'] as String? ?? 'Casablanca',
       name_ar: json['name_ar'] as String? ?? 'Casablanca',
       image: json['image'] as String?,
+      propertyCount: json['_count']?['property'] as int?,
     );
 
 Map<String, dynamic> _$$_CityToJson(_$_City instance) => <String, dynamic>{
@@ -20,4 +21,5 @@ Map<String, dynamic> _$$_CityToJson(_$_City instance) => <String, dynamic>{
       'name_fr': instance.name_fr,
       'name_ar': instance.name_ar,
       'image': instance.image,
+      'propertyCount': instance.propertyCount,
     };

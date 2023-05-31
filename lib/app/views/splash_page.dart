@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:core_template/app/views/navigation/page.dart';
+import 'package:core_template/core/repositories/city_repository.dart';
 import 'package:core_template/core/repositories/property_repository.dart';
 import 'package:core_template/core/utils/extensions/extensions.dart';
 import 'package:provider/provider.dart';
@@ -22,6 +23,7 @@ class _SplashPageState extends State<SplashPage> {
       debugPrint('test');
 
       Provider.of<PropertyRepository>(context, listen: false);
+      Provider.of<CityRespository>(context, listen: false);
       // _propertyRepository.init();
 
       Timer(Duration(seconds: 2), () {

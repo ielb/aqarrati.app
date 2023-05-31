@@ -22,7 +22,7 @@ class Property with _$Property {
     String id,
     String title,
     String thumbnail,
-    int images,
+    List<String> images,
     String slug,
     String userId,
     User user,

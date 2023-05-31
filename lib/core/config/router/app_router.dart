@@ -2,6 +2,7 @@ import 'package:core_template/app/views/auth/login/page.dart';
 import 'package:core_template/app/views/home/page.dart';
 import 'package:core_template/app/views/intro/page.dart';
 import 'package:core_template/app/views/navigation/page.dart';
+import 'package:core_template/app/views/property/page.dart';
 import 'package:core_template/app/views/splash_page.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -33,6 +34,11 @@ class AppRouter {
         return CupertinoPageRoute(
           title: HomePage.name,
           builder: (context) => HomePage(),
+        );
+      case PropertyPage.name:
+        return CupertinoPageRoute(
+          title: PropertyPage.name,
+          builder: (context) => PropertyPage(settings.arguments as String),
         );
     }
     return CupertinoPageRoute(

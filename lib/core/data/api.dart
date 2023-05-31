@@ -17,7 +17,7 @@ class Api {
     },
   ));
   Future<Response<T>> httpGet<T>(String path) async {
-    return await _dio.request(
+    return _dio.request(
       path,
       options: Options(
         method: 'GET',

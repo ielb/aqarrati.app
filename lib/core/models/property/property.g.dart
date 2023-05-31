@@ -10,7 +10,7 @@ _$_Property _$$_PropertyFromJson(Map<String, dynamic> json) => _$_Property(
       json['id'] as String,
       json['title'] as String,
       json['thumbnail'] as String,
-      json['images'] as int,
+      (json['images'] as List<dynamic>).map((e) => e as String).toList(),
       json['slug'] as String,
       json['userId'] as String,
       User.fromJson(json['user'] as Map<String, dynamic>),

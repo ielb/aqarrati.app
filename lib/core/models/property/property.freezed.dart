@@ -23,7 +23,7 @@ mixin _$Property {
   String get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get thumbnail => throw _privateConstructorUsedError;
-  int get images => throw _privateConstructorUsedError;
+  List<String> get images => throw _privateConstructorUsedError;
   String get slug => throw _privateConstructorUsedError;
   String get userId => throw _privateConstructorUsedError;
   User get user => throw _privateConstructorUsedError;
@@ -61,7 +61,7 @@ abstract class $PropertyCopyWith<$Res> {
       {String id,
       String title,
       String thumbnail,
-      int images,
+      List<String> images,
       String slug,
       String userId,
       User user,
@@ -144,7 +144,7 @@ class _$PropertyCopyWithImpl<$Res, $Val extends Property>
       images: null == images
           ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
-              as int,
+              as List<String>,
       slug: null == slug
           ? _value.slug
           : slug // ignore: cast_nullable_to_non_nullable
@@ -272,7 +272,7 @@ abstract class _$$_PropertyCopyWith<$Res> implements $PropertyCopyWith<$Res> {
       {String id,
       String title,
       String thumbnail,
-      int images,
+      List<String> images,
       String slug,
       String userId,
       User user,
@@ -354,9 +354,9 @@ class __$$_PropertyCopyWithImpl<$Res>
           : thumbnail // ignore: cast_nullable_to_non_nullable
               as String,
       null == images
-          ? _value.images
+          ? _value._images
           : images // ignore: cast_nullable_to_non_nullable
-              as int,
+              as List<String>,
       null == slug
           ? _value.slug
           : slug // ignore: cast_nullable_to_non_nullable
@@ -452,7 +452,7 @@ class _$_Property implements _Property {
       this.id,
       this.title,
       this.thumbnail,
-      this.images,
+      final List<String> images,
       this.slug,
       this.userId,
       this.user,
@@ -473,7 +473,8 @@ class _$_Property implements _Property {
       this.area,
       this.rooms,
       this.bathrooms,
-      this.status = PropertyStatus.Active});
+      this.status = PropertyStatus.Active})
+      : _images = images;
 
   factory _$_Property.fromJson(Map<String, dynamic> json) =>
       _$$_PropertyFromJson(json);
@@ -484,8 +485,14 @@ class _$_Property implements _Property {
   final String title;
   @override
   final String thumbnail;
+  final List<String> _images;
   @override
-  final int images;
+  List<String> get images {
+    if (_images is EqualUnmodifiableListView) return _images;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_images);
+  }
+
   @override
   final String slug;
   @override
@@ -544,7 +551,7 @@ class _$_Property implements _Property {
             (identical(other.title, title) || other.title == title) &&
             (identical(other.thumbnail, thumbnail) ||
                 other.thumbnail == thumbnail) &&
-            (identical(other.images, images) || other.images == images) &&
+            const DeepCollectionEquality().equals(other._images, _images) &&
             (identical(other.slug, slug) || other.slug == slug) &&
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.user, user) || other.user == user) &&
@@ -583,7 +590,7 @@ class _$_Property implements _Property {
         id,
         title,
         thumbnail,
-        images,
+        const DeepCollectionEquality().hash(_images),
         slug,
         userId,
         user,
@@ -626,7 +633,7 @@ abstract class _Property implements Property {
       final String id,
       final String title,
       final String thumbnail,
-      final int images,
+      final List<String> images,
       final String slug,
       final String userId,
       final User user,
@@ -658,7 +665,7 @@ abstract class _Property implements Property {
   @override
   String get thumbnail;
   @override
-  int get images;
+  List<String> get images;
   @override
   String get slug;
   @override

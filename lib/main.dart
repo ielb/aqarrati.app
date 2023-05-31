@@ -1,5 +1,6 @@
 import 'package:core_template/app/resources/styles.dart';
 import 'package:core_template/core/config/router/app_router.dart';
+import 'package:core_template/core/repositories/city_repository.dart';
 import 'package:core_template/core/repositories/property_repository.dart';
 import 'package:core_template/core/repositories/users_repository.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ void main() {
     ChangeNotifierProvider<UserRepository>(create: (_) => UserRepository()),
     ChangeNotifierProvider<PropertyRepository>(
         create: (_) => PropertyRepository()),
+    ChangeNotifierProvider<CityRespository>(create: (_) => CityRespository()),
   ], child: MyApp()));
 }
 

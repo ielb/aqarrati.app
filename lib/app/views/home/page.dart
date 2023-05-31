@@ -1,8 +1,10 @@
+import 'package:core_template/app/components/city_widget.dart';
 import 'package:core_template/app/components/input.dart';
 import 'package:core_template/app/components/property.dart';
 import 'package:core_template/app/resources/icons.dart';
 import 'package:core_template/app/views/auth/login/page.dart';
 import 'package:core_template/core/config/contants/icons.dart';
+import 'package:core_template/core/repositories/city_repository.dart';
 import 'package:core_template/core/repositories/property_repository.dart';
 import 'package:core_template/core/utils/extensions/extensions.dart';
 import 'package:flutter/gestures.dart';
@@ -56,7 +58,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      body: Consumer<PropertyRepository>(builder: (context, repo, _) {
+      body: Consumer2<PropertyRepository, CityRespository>(
+          builder: (context, repo, cityRepo, _) {
         return SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: Container(
@@ -103,7 +106,6 @@ class _HomePageState extends State<HomePage> {
                               propertyTypes[index].icon,
                               height: 70,
                               width: 800,
-                              color: AppColors.primary,
                             ),
                             Text(propertyTypes[index].name)
                                 .paddingOnly(top: 10)
@@ -159,7 +161,41 @@ class _HomePageState extends State<HomePage> {
                           },
                         );
                       }),
-                ).paddingOnly(top: 20)
+                ).paddingSymmetric(vertical: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Popular cities',
+                      style: TextStyle(
+                          color: AppColors.black,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500),
+                    ),
+                    Text(
+                      'See all',
+                      style: TextStyle(color: AppColors.primary),
+                    ).click(onTap: () {
+                      //Navigator.of(context).pushNamed(PropertyPage.name);
+                    }),
+                  ],
+                ),
+                SizedBox(
+                  height: 220,
+                  width: screenSize(context).width,
+                  child: ListView.builder(
+                      itemCount: cityRepo.homeCities.length,
+                      shrinkWrap: false,
+                      scrollDirection: Axis.horizontal,
+                      physics: BouncingScrollPhysics(),
+                      itemExtent: 170,
+                      itemBuilder: (context, index) {
+                        return CityWidget(
+                          cityRepo.homeCities[index],
+                          click: () {},
+                        );
+                      }),
+                ).paddingOnly(top: 20),
               ],
             ),
           ),
