@@ -22,12 +22,15 @@ class CityRespository extends BaseRepository {
   }
 
   Future<void> fetchImagedCities() async {
-    final Response<List<dynamic>> response =
-        await CityService.instance.fetchImagedCities();
+    try {
+      final Response<List<dynamic>> response =
+          await CityService.instance.fetchImagedCities();
 
-    if (response.statusCode == 200 || response.statusCode == 201) {
-      log.d(response.data?[0]);
-      homeCities.addAll(response.data!.map((e) => City.fromJson(e)).toList());
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        homeCities.addAll(response.data!.map((e) => City.fromJson(e)).toList());
+      }
+    } catch (e) {
+      log.e(e);
     }
   }
 }
