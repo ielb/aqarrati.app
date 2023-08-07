@@ -1,18 +1,26 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core_template/app/resources/icons.dart';
 import 'package:core_template/app/views/property/page.dart';
 import 'package:core_template/core/models/property/property.dart';
 import 'package:core_template/core/utils/extensions/extensions.dart';
+import 'package:core_template/core/utils/formats/price_format.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
 
 class PropertyItem extends StatelessWidget {
   PropertyItem(this.property,
-      {super.key, this.isArchived = false, this.archive});
-  final formatCurrency = new NumberFormat.currency(
-      locale: 'fr_MA', symbol: 'MAD', decimalDigits: 0);
+      {super.key,
+      this.isArchived = false,
+      this.archive,
+      this.mBottom = 5,
+      this.mLeft = 0,
+      this.mTop = 0,
+      this.mRight = 20});
+
   final Property property;
   final bool isArchived;
+  final double mRight;
+  final double mBottom;
+  final double mLeft;
+  final double mTop;
 
   final Function()? archive;
 
@@ -22,7 +30,8 @@ class PropertyItem extends StatelessWidget {
       constraints: BoxConstraints(maxHeight: 300, maxWidth: 280),
       width: 280,
       padding: EdgeInsets.all(9),
-      margin: EdgeInsets.only(right: 20, bottom: 5),
+      margin: EdgeInsets.only(
+          right: mRight, bottom: mBottom, top: mTop, left: mLeft),
       decoration: BoxDecoration(
           color: AppColors.background,
           borderRadius: BorderRadius.circular(15.0),
@@ -37,8 +46,8 @@ class PropertyItem extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(10.0),
-                child: CachedNetworkImage(
-                  imageUrl: property.thumbnail,
+                child: Image.network(
+                  property.thumbnail,
                   height: 160,
                   width: 350,
                   fit: BoxFit.cover,
@@ -106,7 +115,7 @@ class PropertyItem extends StatelessWidget {
                     children: [
                       Icon(
                         AppIcons.bed,
-                        color: AppColors.primary,
+                        color: AppColors.primary.withOpacity(.6),
                         size: 18,
                       ).paddingOnly(right: 15),
                       Text(
@@ -122,7 +131,7 @@ class PropertyItem extends StatelessWidget {
                     children: [
                       Icon(
                         AppIcons.bathroom,
-                        color: AppColors.primary,
+                        color: AppColors.primary.withOpacity(.6),
                         size: 18,
                       ).paddingOnly(right: 5),
                       Text(
@@ -138,7 +147,7 @@ class PropertyItem extends StatelessWidget {
                     children: [
                       Icon(
                         AppIcons.plan,
-                        color: AppColors.primary,
+                        color: AppColors.primary.withOpacity(.6),
                         size: 18,
                       ).paddingOnly(right: 5),
                       Text(
@@ -155,8 +164,8 @@ class PropertyItem extends StatelessWidget {
             ],
           ),
           Positioned(
-            right: 5,
-            top: 5,
+            right: 4,
+            top: 4,
             child: Container(
               padding: EdgeInsets.all(5),
               alignment: Alignment.center,
@@ -164,9 +173,22 @@ class PropertyItem extends StatelessWidget {
                 AppIcons.archive_bold,
                 color: isArchived ? AppColors.secondary : AppColors.white,
               ).click(onTap: archive),
+              decoration: UiDecoration.glassMorphismDecoration(10),
+            ),
+          ),
+          Positioned(
+            left: 4,
+            top: 4,
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 3, horizontal: 10),
+              alignment: Alignment.center,
+              child: Text(
+                property.for_.name,
+                style: TextStyle(color: AppColors.white),
+              ),
               decoration: BoxDecoration(
-                  color: Color.fromARGB(111, 206, 206, 206).withOpacity(.5),
-                  borderRadius: BorderRadius.circular(10)),
+                  color: AppColors.primary,
+                  borderRadius: BorderRadius.circular(8)),
             ),
           )
         ],

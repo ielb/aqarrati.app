@@ -1,4 +1,5 @@
 /// this file exports all the extensions files in the extensions dir
+export 'package:core_template/app/resources/decoration.dart';
 export 'package:core_template/core/config/styles/colors.dart';
 export 'package:flutter/material.dart';
 

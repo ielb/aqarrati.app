@@ -15,8 +15,11 @@ class Input extends StatelessWidget {
       this.color = AppColors.white,
       this.viewPassword,
       this.validator,
+      this.onFieldSubmitted,
+      this.onSaved,
       this.icon,
-      this.sufficIcon});
+      this.sufficIcon,
+      this.inputAction});
   final String? label;
   final String? hint;
   final Widget? icon;
@@ -30,6 +33,9 @@ class Input extends StatelessWidget {
   final double pHorizontal;
   final String? Function(String?)? validator;
   final double hintSize;
+  final void Function(String)? onFieldSubmitted;
+  final void Function(String?)? onSaved;
+  final TextInputAction? inputAction;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +54,10 @@ class Input extends StatelessWidget {
           keyboardType: keyboardType,
           obscureText: obscureText,
           validator: validator,
+          onFieldSubmitted: onFieldSubmitted,
+          onSaved: onSaved,
           style: const TextStyle(fontSize: 14),
+          textInputAction: inputAction,
           decoration: InputDecoration(
               hintText: hint,
               hintStyle: TextStyle(fontSize: hintSize),

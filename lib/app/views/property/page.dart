@@ -1,9 +1,10 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core_template/app/resources/icons.dart';
 import 'package:core_template/app/views/property/components/carousel.dart';
+import 'package:core_template/app/views/property/components/similar_properties.dart';
 import 'package:core_template/core/models/property/property.dart';
 import 'package:core_template/core/repositories/property_repository.dart';
 import 'package:core_template/core/utils/extensions/extensions.dart';
+import 'package:infinite_carousel/infinite_carousel.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -20,7 +21,7 @@ class PropertyPage extends StatefulWidget {
 class _PropertyPageState extends State<PropertyPage> {
   final formatCurrency = new NumberFormat.currency(
       locale: 'fr_MA', symbol: 'MAD', decimalDigits: 0);
-
+  InfiniteScrollController _controller = InfiniteScrollController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,17 +51,17 @@ class _PropertyPageState extends State<PropertyPage> {
                           ],
                               begin: Alignment.topCenter,
                               end: Alignment.bottomCenter)),
-                      child: Carousel(images: snapshot.data!.images),
+                      child: Carousel(
+                        images: snapshot.data!.images,
+                        controller: _controller,
+                      ),
                     ),
                   ),
                   leading: Container(
                     alignment: Alignment.center,
                     margin: EdgeInsets.all(8),
                     padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                        color:
-                            Color.fromARGB(255, 224, 224, 224).withOpacity(0.4),
-                        borderRadius: BorderRadius.circular(70)),
+                    decoration: UiDecoration.glassMorphismDecoration(50),
                     child: Icon(
                       AppIcons.arrow_left_2,
                       size: 20,
@@ -73,10 +74,7 @@ class _PropertyPageState extends State<PropertyPage> {
                       alignment: Alignment.center,
                       margin: EdgeInsets.all(8),
                       padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 224, 224, 224)
-                              .withOpacity(0.4),
-                          borderRadius: BorderRadius.circular(70)),
+                      decoration: UiDecoration.glassMorphismDecoration(50),
                       child: Icon(
                         AppIcons.archive_1,
                         size: 20,
@@ -230,10 +228,9 @@ class _PropertyPageState extends State<PropertyPage> {
                               height: 50,
                               width: 50,
                               child: CircleAvatar(
-                                backgroundImage: CachedNetworkImageProvider(
-                                    'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1160&q=80',
-                                    maxHeight: 100,
-                                    maxWidth: 100),
+                                backgroundImage: NetworkImage(
+                                  'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1160&q=80',
+                                ),
                               ),
                             ).paddingOnly(right: 10),
                             Column(
@@ -301,8 +298,10 @@ class _PropertyPageState extends State<PropertyPage> {
                           ),
                         ).paddingSymmetric(vertical: 10),
                         Text(snapshot.data!.description != null
-                            ? snapshot.data!.description!
-                            : 'N/A')
+                                ? snapshot.data!.description!
+                                : 'N/A')
+                            .paddingOnly(bottom: 15),
+                        SimilarProperties(slug: widget.slug),
                       ],
                     ),
                   )

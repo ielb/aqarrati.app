@@ -7,10 +7,6 @@ class CityRespository extends BaseRepository {
   List<City> cities = List.empty(growable: true);
   List<City> homeCities = List.empty(growable: true);
 
-  CityRespository() {
-    this.init();
-  }
-
   init() async {
     await this.fetchImagedCities();
     await this.fetchCities();
@@ -30,6 +26,7 @@ class CityRespository extends BaseRepository {
         await CityService.instance.fetchImagedCities();
 
     if (response.statusCode == 200 || response.statusCode == 201) {
+      log.d(response.data?[0]);
       homeCities.addAll(response.data!.map((e) => City.fromJson(e)).toList());
     }
   }

@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core_template/core/models/city/city.dart';
 import 'package:core_template/core/utils/extensions/extensions.dart';
 
@@ -21,7 +20,7 @@ class CityWidget extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
               image: DecorationImage(
-                image: CachedNetworkImageProvider(
+                image: NetworkImage(
                   city.image!,
                 ),
                 filterQuality: FilterQuality.high,

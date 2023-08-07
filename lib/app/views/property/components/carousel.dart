@@ -1,21 +1,23 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core_template/core/utils/extensions/extensions.dart';
 import 'package:infinite_carousel/infinite_carousel.dart';
 
+// ignore: must_be_immutable
 class Carousel extends StatelessWidget {
-  const Carousel({
+  Carousel({
     required this.images,
     this.controller,
     super.key,
   });
 
   final List<String> images;
-  final ScrollController? controller;
+  final InfiniteScrollController? controller;
+
+  int currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Stack(
+    return StatefulBuilder(builder: (context, setState) {
+      return Stack(
         children: [
           InfiniteCarousel.builder(
             itemCount: images.length,
@@ -23,53 +25,72 @@ class Carousel extends StatelessWidget {
             center: true,
             anchor: 0.0,
             velocityFactor: 0.2,
-            onIndexChanged: (index) {},
-            controller: controller,
+            onIndexChanged: (index) {
+              setState(() {
+                currentIndex = index;
+                controller?.animateToItem(index);
+              });
+            },
             axisDirection: Axis.horizontal,
             loop: true,
             itemBuilder: (context, itemIndex, realIndex) {
-              return CachedNetworkImage(
-                imageUrl: images[itemIndex],
+              return Image.network(
+                images[currentIndex],
                 fit: BoxFit.fill,
               );
             },
           ),
-          Positioned(
-            bottom: 10,
-            width: screenSize(context).width,
-            child: Container(
-              color: AppColors.white,
-              height: 50,
-              child: InfiniteCarousel.builder(
-                itemCount: images.length,
-                itemExtent: 80,
-                center: true,
-                anchor: 0.0,
-                velocityFactor: 0.2,
-                onIndexChanged: (index) {},
-                controller: controller,
-                axisDirection: Axis.horizontal,
-                loop: true,
-                itemBuilder: (context, itemIndex, realIndex) {
-                  return Container(
-                    decoration: BoxDecoration(boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey, spreadRadius: 5, blurRadius: 2)
-                    ]),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: CachedNetworkImage(
-                        imageUrl: images[itemIndex],
-                        fit: BoxFit.fill,
-                      ).paddingSymmetric(horizontal: 5),
-                    ),
-                  );
-                },
+          Visibility(
+            visible: images.length > 1,
+            child: Positioned(
+              bottom: 10,
+              width: screenSize(context).width,
+              child: Container(
+                color: AppColors.transparent,
+                height: 50,
+                child: InfiniteCarousel.builder(
+                  itemCount: images.length,
+                  itemExtent: 80,
+                  center: true,
+                  anchor: 0.0,
+                  velocityFactor: 0.2,
+                  onIndexChanged: (index) {
+                    setState(() {
+                      currentIndex = index;
+                    });
+                  },
+                  controller: controller,
+                  axisDirection: Axis.horizontal,
+                  loop: true,
+                  itemBuilder: (context, itemIndex, realIndex) {
+                    return Container(
+                      margin: EdgeInsets.symmetric(horizontal: 5),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          image: DecorationImage(
+                              colorFilter: itemIndex != currentIndex
+                                  ? ColorFilter.mode(
+                                      AppColors.black.withOpacity(.4),
+                                      BlendMode.darken)
+                                  : null,
+                              fit: BoxFit.fill,
+                              image: NetworkImage(
+                                images[itemIndex],
+                              ))),
+                    ).click(onTap: () {
+                      print(itemIndex);
+                      setState(() {
+                        currentIndex = itemIndex;
+                        controller?.animateToItem(itemIndex);
+                      });
+                    });
+                  },
+                ),
               ),
             ),
           ),
         ],
-      ),
-    );
+      );
+    });
   }
 }
