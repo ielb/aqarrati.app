@@ -1,5 +1,5 @@
-import 'package:core_template/app/components/button.dart';
-import 'package:core_template/app/components/input.dart';
+import 'package:core_template/app/components/ui/button.dart';
+import 'package:core_template/app/components/ui/input.dart';
 import 'package:core_template/app/views/navigation/page.dart';
 import 'package:core_template/core/config/contants/icons.dart';
 import 'package:core_template/core/repositories/users_repository.dart';

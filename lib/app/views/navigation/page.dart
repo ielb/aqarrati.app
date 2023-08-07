@@ -18,10 +18,16 @@ class _NavigationPageState extends State<NavigationPage> {
   final List<IconData> iconList = [
     AppIcons.home,
     AppIcons.heart,
-    AppIcons.search_normal_1,
     AppIcons.message,
     AppIcons.frame_1
   ];
+  final List<Widget> pagesList = [
+    HomePage(),
+    HomePage(),
+    HomePage(),
+    HomePage()
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,6 +57,6 @@ class _NavigationPageState extends State<NavigationPage> {
           onTap: (index) => setState(() => _bottomNavIndex = index),
           //other params
         ),
-        body: HomePage());
+        body: pagesList[_bottomNavIndex]);
   }
 }

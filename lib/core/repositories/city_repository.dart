@@ -7,10 +7,6 @@ class CityRespository extends BaseRepository {
   List<City> cities = List.empty(growable: true);
   List<City> homeCities = List.empty(growable: true);
 
-  CityRespository() {
-    this.init();
-  }
-
   init() async {
     await this.fetchImagedCities();
     await this.fetchCities();

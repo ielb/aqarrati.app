@@ -16,74 +16,65 @@ class Api {
       HttpHeaders.contentTypeHeader: 'application/json',
     },
   ));
-  Future<Response<T>> httpGet<T>(String path) async {
+  Future<Response<T>> httpGet<T>(String path,
+      {Map<String, dynamic>? headers}) async {
     return _dio.request(
       path,
-      options: Options(
-        method: 'GET',
-      ),
+      options: Options(method: 'GET', headers: headers),
     );
   }
 
-  Future<Response<T>> httpPost<T>(
-      String path, Map<String, dynamic> body) async {
+  Future<Response<T>> httpPost<T>(String path,
+      {Map<String, dynamic>? body, Map<String, dynamic>? headers}) async {
     print(_dio.options.baseUrl);
     return await _dio.request(
       path,
       data: body,
-      options: Options(
-        method: 'POST',
-        contentType: 'application/json',
-      ),
+      options: Options(method: 'POST', headers: headers),
     );
   }
 
-  Future<Response> httpPut(String path, Map<String, dynamic> body) async {
+  Future<Response> httpPut(String path,
+      {Map<String, dynamic>? body, Map<String, dynamic>? headers}) async {
     return await _dio.put(
       path,
       data: body,
-      options: Options(
-        method: 'PUT',
-        contentType: 'application/json',
-      ),
+      options: Options(method: 'PUT', headers: headers),
     );
   }
 
-  Future<Response> httpDelete(String path) async {
+  Future<Response> httpDelete(String path,
+      {Map<String, dynamic>? headers}) async {
     return await _dio.delete(
       path,
-      options: Options(
-        method: 'DELETE',
-      ),
+      options: Options(method: 'DELETE', headers: headers),
     );
   }
 
-  Future<Response> httpPatch(String path, Map<String, dynamic> body) async {
+  Future<Response> httpPatch(String path,
+      {Map<String, dynamic>? body, Map<String, dynamic>? headers}) async {
     return await _dio.patch(
       path,
       data: body,
-      options: Options(
-        method: 'PATCH',
-        contentType: 'application/json',
-      ),
+      options: Options(method: 'PATCH', headers: headers),
     );
   }
 
-  Future<Response> httpHead(String path) async {
+  Future<Response> httpHead(String path,
+      {Map<String, dynamic>? headers}) async {
     return await _dio.head(
       path,
-      options: Options(
-        method: 'HEAD',
-      ),
+      options: Options(method: 'HEAD', headers: headers),
     );
   }
 
-  Future<Response> postWithFile(String path, File file) async {
+  Future<Response> postWithFile(String path, File file,
+      {Map<String, dynamic>? headers}) async {
     String fileName = file.path.split('/').last;
     FormData formData = FormData.fromMap({
       'file': await MultipartFile.fromFile(file.path, filename: fileName),
     });
     return await _dio.request(path,
-        data: formData, options: Options(method: 'POST'));
+        data: formData, options: Options(method: 'POST', headers: headers));
   }
 }

@@ -1,4 +1,4 @@
-import 'package:core_template/app/components/button.dart';
+import 'package:core_template/app/components/ui/button.dart';
 import 'package:core_template/app/views/auth/login/page.dart';
 import 'package:core_template/core/utils/extensions/extensions.dart';
 import 'package:flutter/gestures.dart';
