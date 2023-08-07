@@ -10,7 +10,7 @@ class Api {
   }
 
   final Dio _dio = Dio(BaseOptions(
-    baseUrl: 'http://192.168.160.1:3030',
+    baseUrl: 'http://127.0.0.1:3030',
     headers: {
       HttpHeaders.acceptHeader: 'application/json',
       HttpHeaders.contentTypeHeader: 'application/json',
